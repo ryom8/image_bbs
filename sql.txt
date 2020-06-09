@@ -1,0 +1,42 @@
+
+// 掲示板用テーブル
+CREATE TABLE bbs(
+	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	date DATETIME,
+	name VARCHAR(32),
+	email VARCHAR(32),
+	title VARCHAR(64),
+	img CHAR(18),
+	category CHAR(16),
+	delpass VARCHAR(8),
+	message VARCHAR(1024)
+);
+
+// レス用テーブル
+
+CREATE TABLE res(
+	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	parent INTEGER,
+	name VARCHAR(32),
+	message VARCHAR(256)
+);
+
+
+ALTER TABLE res CONVERT TO CHARACTER SET utf8mb4;
+
+INSERT INTO bbs (date, name, email, title, img, category, delpass, message) VALUES (NOW(), "テストさん", "test-san@test.jp", "投稿テスト", "20200403114636.png", "動物", "password", "投稿テスト<br/>改行いけるかな？");
+
+
+INSERT INTO bbs (date, name, email, title, img, category, delpass, message) VALUES (NOW(), "謎の黒猫", "yamato@kuroneko.jp", "うとうと", "20200403153059.jpg", "動物", "nyaanyaa", "もっふもふ～ω<br/>にしてやんよ★");
+
+INSERT INTO res (parent, name, message) VALUES (1, "テストさん２", "レステスト～");
+
+CREATE TABLE bbs_admin(
+	adid VARCHAR(8),
+	ademail VARCHAR(32),
+	adpass VARCHAR(8)
+);
+
+ALTER TABLE bbs_admin CONVERT TO CHARACTER SET utf8mb4;
+
+INSERT INTO bbs_admin VALUES ("admin", "kimuraryonan@gmail.com", "adpass");
